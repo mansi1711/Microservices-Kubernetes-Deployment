@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator
+  labels: 
+    app: aggregator
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator
+  template: 
+    metadata: 
+      labels: 
+        app: aggregator
+    spec: 
+      containers: 
+       - env: 
+         - name: BASE_URL_USER
+           valueFrom: 
+             configMapKeyRef:
+               key: BASE_URL_USER
+               name: aggregator-config-jglv
+         - name: BASE_URL_ORDERS
+           valueFrom: 
+             configMapKeyRef:
+               key: BASE_URL_ORDERS
+               name: aggregator-config-jglv
+         - name: aggregator-1
+           image: mansi17/aggregator
+           ports: 
+            - containerPort: 8082
