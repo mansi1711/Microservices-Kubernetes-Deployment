@@ -25,6 +25,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		 <dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-spring-jaeger-web-starter</artifactId>
+			<version>1.0.3</version>
+		</dependency>
 
 	</dependencies>
 	
@@ -37,6 +43,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+		
         </dependencies>
     </dependencyManagement>
 

@@ -19,3 +19,24 @@ spec:
         image: mansi17/user:microservices2
         ports:
         - containerPort: 8080
+        env: 
+         - name: MYSQL_PASSWORD
+           valueFrom: 
+             secretKeyRef: 
+               name: my-db-pass
+               key: password
+         - name: JAEGAR_HOST
+           valueFrom:
+            configMapKeyRef:
+              key: JAEGAR_HOST
+              name: userconfig
+         - name: MYSQL_USERNAME
+           valueFrom:
+            configMapKeyRef:
+              key: MYSQL_USERNAME
+              name: userconfig
+         - name: MYSQL
+           valueFrom:
+            configMapKeyRef:
+              key: MYSQL
+              name: userconfig

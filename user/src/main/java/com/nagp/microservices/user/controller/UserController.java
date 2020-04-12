@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nagp.microservices.user.entities.User;
 import com.nagp.microservices.user.service.UserService;
 
 @RestController
@@ -20,13 +19,12 @@ public class UserController {
 	
 	@GetMapping
 	public String getUserDetails(@RequestParam(name = "id") Integer id){
-		ObjectMapper mapper = new ObjectMapper();
+		User user = userService.getUserDetails(id);
+		
 		String userJSONString = null;
-		try {
-			userJSONString = mapper.writeValueAsString(userService.getUserDetails(id));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		
+			userJSONString = "{\"name\":\""+ user.getName() + "\",\"email\":\""+ user.getEmail() + "\"}";
+		
 		return userJSONString;
 	}
 
